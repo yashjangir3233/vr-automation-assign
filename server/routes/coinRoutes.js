@@ -4,6 +4,7 @@ const { fetchCoins } = require("../services/coinService");
 const CurrentData = require("../models/CurrentData");
 const HistoryData = require("../models/HistoryData");
 
+
 router.get("/coins", async (req, res) => {
   try {
     const coins = await fetchCoins();
