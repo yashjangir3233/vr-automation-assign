@@ -1,11 +1,10 @@
-# 🚀 Crypto Dashboard — MERN Stack Application
+# Crypto Dashboard — MERN Stack Application
 
 A full-stack cryptocurrency tracker built with the **MERN Stack** (MongoDB, Express.js, React.js, Node.js) that displays real-time market data for the top 10 cryptocurrencies using the [CoinGecko API](https://www.coingecko.com/en/api/documentation).  
-This project was developed as part of the **VR Automations Developer Test**.
 
 ---
 
-## 📌 Features
+## Features
 
 ### **Frontend**
 - Displays **Top 10 cryptocurrencies** with:
@@ -26,7 +25,7 @@ This project was developed as part of the **VR Automations Developer Test**.
   - `POST /api/history` → Saves snapshot of current prices to MongoDB
   - `GET /api/history/:coinId` *(optional)* → Returns historical price data for a coin
 - **Database Models**:
-  - **CurrentData** → Stores latest data (overwritten on each sync)
+  - **CurrentData** → Stores latest data
   - **HistoryData** → Stores hourly historical records
 - **Cron Job**:
   - Runs every 1 hour
@@ -35,12 +34,12 @@ This project was developed as part of the **VR Automations Developer Test**.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 **Frontend**
 - React.js
 - react-icons
-- CSS (custom styling)
+- CSS
 
 **Backend**
 - Node.js
@@ -58,9 +57,16 @@ This project was developed as part of the **VR Automations Developer Test**.
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
-### **1️⃣ Clone the repository**
 ```bash
-git clone https://github.com/yourusername/crypto-dashboard.git
-cd crypto-dashboard
+git clone https://github.com/yashjangir3233/vr-automation-assign.git
+cd vr-automation-assign
+cd client
+npm install
+npm run dev
+cd ..
+cd server
+npm install
+node index.js
+
