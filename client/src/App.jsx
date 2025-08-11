@@ -20,7 +20,8 @@ const App = () => {
   const fetchCryptoData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/coins"); // ✅ Backend endpoint
+      // const response = await fetch("http://localhost:5000/api/coins");
+      const response = await fetch("https://vr-automation-assign.vercel.app/api/coins");
 
       if (!response.ok) {
         throw new Error("Failed to fetch data from backend");
