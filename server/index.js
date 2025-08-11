@@ -8,15 +8,16 @@ const coinRoutes = require("./routes/coinRoutes");
 const { fetchCoins } = require("./services/coinService");
 const HistoryData = require("./models/HistoryData");
 
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error(err));
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api", coinRoutes);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.error(err));
 
 const PORT = process.env.PORT || 5000;
 
