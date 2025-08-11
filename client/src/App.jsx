@@ -14,9 +14,7 @@ const App = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-  const [lastUpdated, setLastUpdated] = useState(null);
 
-  // Fetch cryptocurrency data from backend
   const fetchCryptoData = async () => {
     try {
       setLoading(true);
@@ -29,7 +27,6 @@ const App = () => {
 
       const data = await response.json();
       setCryptoData(data);
-      setLastUpdated(new Date());
       setError(null);
     } catch (err) {
       setError("Failed to fetch cryptocurrency data");
@@ -39,14 +36,12 @@ const App = () => {
     }
   };
 
-  // Initial fetch + auto-refresh every 30 minutes
   useEffect(() => {
     fetchCryptoData();
-    const interval = setInterval(fetchCryptoData, 1800000); // 30 mins
+    const interval = setInterval(fetchCryptoData, 1800000);
     return () => clearInterval(interval);
   }, []);
 
-  // Handle sorting
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -55,7 +50,6 @@ const App = () => {
     setSortConfig({ key, direction });
   };
 
-  // Get sort icon
   const getSortIcon = (columnKey) => {
     if (sortConfig.key !== columnKey) {
       return <FaSort className="sort-icon" />;
@@ -67,7 +61,6 @@ const App = () => {
     );
   };
 
-  // Filter + sort data
   const filteredAndSortedData = useMemo(() => {
     const filteredData = cryptoData.filter(
       (coin) =>
@@ -94,7 +87,6 @@ const App = () => {
     return filteredData;
   }, [cryptoData, searchTerm, sortConfig]);
 
-  // Format currency
   const formatCurrency = (value) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -103,7 +95,6 @@ const App = () => {
       maximumFractionDigits: 6,
     }).format(value);
 
-  // Format market cap
   const formatMarketCap = (value) => {
     if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
@@ -111,13 +102,11 @@ const App = () => {
     return formatCurrency(value);
   };
 
-  // Format percentage
   const formatPercentage = (value) => {
     const formatted = value?.toFixed(2) || "0.00";
     return `${value >= 0 ? "+" : ""}${formatted}%`;
   };
 
-  // Format timestamp
   const formatTimestamp = (date) => date?.toLocaleString() || "Never";
 
   if (loading && cryptoData.length === 0) {
@@ -140,7 +129,6 @@ const App = () => {
             <h1>Crypto Dashboard</h1>
           </div>
           <div className="header-info">
-            <p>Last Updated: {formatTimestamp(lastUpdated)}</p>
             <button
               onClick={fetchCryptoData}
               className="refresh-btn"

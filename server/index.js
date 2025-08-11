@@ -21,7 +21,6 @@ app.use("/api", coinRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-// Cron job: every 1 hour
 cron.schedule("0 * * * *", async () => {
   console.log("Running hourly job...");
   try {
