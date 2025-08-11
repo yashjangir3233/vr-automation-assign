@@ -4,7 +4,6 @@ const { fetchCoins } = require("../services/coinService");
 const CurrentData = require("../models/CurrentData");
 const HistoryData = require("../models/HistoryData");
 
-// GET /api/coins - fetch live data from CoinGecko
 router.get("/coins", async (req, res) => {
   try {
     const coins = await fetchCoins();
@@ -16,7 +15,6 @@ router.get("/coins", async (req, res) => {
   }
 });
 
-// POST /api/history - save snapshot to DB
 router.post("/history", async (req, res) => {
   try {
     const coins = await fetchCoins();
@@ -27,7 +25,6 @@ router.post("/history", async (req, res) => {
   }
 });
 
-// GET /api/history/:coinId - fetch historical data for charts
 router.get("/history/:coinId", async (req, res) => {
   try {
     const { coinId } = req.params;
